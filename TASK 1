@@ -1,0 +1,46 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Assuming your CSV file is on your Desktop
+filepath = ("C:/Users/HP/Desktop/Crop_recommendation.csv")
+
+# Read the data into a DataFrame
+df = pd.read_csv(filepath)
+
+# Print the DataFrame (optional)
+print(df)
+
+# Display the first 5 rows
+df.head()
+
+# Get information on data types and missing values
+df.info()
+
+# Check if all values in 'N' column are greater than 90 (not recommended)
+# Use appropriate filtering methods instead (e.g., df[df['N'] > 90])
+# print(df['N'])
+
+# Count missing values in each column
+print(df.isnull().sum())
+
+# Separate features (X) and target variable (y)
+X = df.drop('label', axis=1)
+y = df['label']
+
+# Create a histogram for temperature
+plt.figure(figsize=(8, 6))  # Set figure size for better visualization
+plt.hist(df['temperature'], bins=20, color='skyblue', edgecolor='black')
+plt.xlabel('Temperature')
+plt.ylabel('Frequency')
+plt.title('Distribution of Temperature')
+plt.grid(True)  # Add grid lines for better readability
+plt.show()
+
+# Create a scatter plot for temperature vs. rainfall
+plt.figure(figsize=(8, 6))
+plt.scatter(df['temperature'], df['rainfall'], color='green', alpha=0.5)
+plt.xlabel('Temperature')
+plt.ylabel('Rainfall')
+plt.title('Scatter Plot of Temperature vs. Rainfall')
+plt.grid(True)
+plt.show()
